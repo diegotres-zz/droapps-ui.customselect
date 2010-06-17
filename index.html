@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-br" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery UI Custom Select</title>
+  
+  <!-- common css -->
+  <link rel="stylesheet" href="css/reset.css" type="text/css" media="all" />
+  
+  <!-- dependencies -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.js"></script>
+  
+  <!-- plugin files -->
+  <link href="css/droapps-ui.customselect.css" rel="stylesheet" type="text/css" media="all" />
+  <script src="js/droapps-ui.customselect.js"></script>
+  
+  <!-- apply custom select -->
+  <script> $(function(){ $('#brands').customselect(); });</script>
+  
+</head>
+<body>
+  
+  <!-- select that will be skinned -->
+  <select id="brands">
+    <option value="1">Apple</option>
+    <option value="2">Honda</option>
+    <option value="3">Marlboro</option>
+    <option value="4">Starbucks</option>
+    <option value="5">Burguer King</option>
+    <option value="6">Porsche</option>
+    <option value="7">New Era</option>
+    <option value="8">Oakley</option>
+    <option value="9">Gibson</option>
+  </select>
+  
+</body>
+</html>
