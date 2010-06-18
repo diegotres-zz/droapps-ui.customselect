@@ -119,7 +119,7 @@ $.widget( "droapps-ui.customselect", {
 			case 'middle':
 			case 'center':
 				this.holder_list.css({
-					top		: this.handler.outerHeight( true ),
+					top		: this.handler.outerHeight( true )/2,
 					bottom	: 'auto'
 				});
 				break;
@@ -144,10 +144,12 @@ $.widget( "droapps-ui.customselect", {
 	
 	_fixHeight: function() {
 		if ( typeof this.options.visible === 'number' && this.items.length > this.options.visible ) {
+			this.holder_list_height = this.height_items * this.options.visible;
 			this.holder_items
-				.height( this.height_items * this.options.visible )
+				.height( this.holder_list_height )
 				.css({ overflow: 'auto' });
 		} else {
+			this.holder_list_height = 0;
 			this.holder_items
 				.height( 'auto' )
 				.css({ overflow: 'hidden' });
@@ -164,11 +166,20 @@ $.widget( "droapps-ui.customselect", {
 	_open: function( e ) {
 		var self    = this,
 			context = this.options.context ? this.options.context : this.skinned;
-			
+		
 		if( this.holder_list.not(':visible') ) {
-			this.holder_list.slideDown( this.options.duration , function(){
-				if( self.options.open ) { self.options.open.apply( context , arguments ); }
-			});
+			if ( this.options.position == 'middle' || this.options.position == 'center' ) {
+				this.holder_list.height(0).css({display: 'block'}).animate({
+					top: -this.holder_list_height/2 + this.handler.outerHeight( true )/2,
+					height: this.holder_list_height
+				}, this.options.duration, function(){
+					if( self.options.open ) { self.options.open.apply( context , arguments ); }
+				});
+			} else {
+				this.holder_list.slideDown( this.options.duration , function(){
+					if( self.options.open ) { self.options.open.apply( context , arguments ); }
+				});
+			}
 		}
 	},
 	
@@ -177,9 +188,19 @@ $.widget( "droapps-ui.customselect", {
 			context = this.options.context ? this.options.context : this.skinned;
 			
 		if( this.holder_list.is(':visible') ) {
-			this.holder_list.css({ overflow: 'hidden'}).slideUp( this.options.duration , function(){
-				if( self.options.close ) { self.options.close.apply( context , arguments ); }
-			});
+			if ( this.options.position == 'middle' || this.options.position == 'center' ) {
+				this.holder_list.animate({
+					top: this.handler.outerHeight( true )/2,
+					height: 0
+				}, this.options.duration, function(){
+					$(this).height(0).css({display: 'none'})
+					if( self.options.close ) { self.options.close.apply( context , arguments ); }
+				});
+			} else {
+				this.holder_list.css({ overflow: 'hidden'}).slideUp( this.options.duration , function(){
+					if( self.options.close ) { self.options.close.apply( context , arguments ); }
+				});
+			}
 		}
 	},
 
