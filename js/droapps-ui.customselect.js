@@ -32,6 +32,7 @@ $.widget( "droapps-ui.customselect", {
 	
 	_create: function() {
 		var self = this;
+		this.element_width = this.element.outerWidth( true );
 		this.element.addClass('ui-select-skinned');
 		this.items         = $( 'option' , this.element );
 		this.selected_item = $( ':selected' , this.element );
@@ -92,7 +93,11 @@ $.widget( "droapps-ui.customselect", {
 	},
 	
 	_render: function() {
-		this.skinned.insertAfter( this.element );
+		var skinned_before_width = this.skinned.outerWidth( true );
+		var skinned_width = skinned_before_width > this.element_width ? 
+							skinned_before_width : 
+							this.element_width;
+		this.skinned.insertAfter( this.element ).width( skinned_width || 'auto' );
 		this.height_items = this.items
 							.not('.' + this.options.selected_class)
 							.first()

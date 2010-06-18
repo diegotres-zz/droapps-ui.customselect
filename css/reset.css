@@ -6,4 +6,9 @@
 body {
 	padding: 250px 300px;
 	background: #3C4739;
+	font: 12px 'trebuchet ms', arial, sans-serif;
+}
+
+select#brands {
+/*	width: 150px;*/
 }

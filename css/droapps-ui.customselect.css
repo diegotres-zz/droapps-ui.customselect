@@ -28,6 +28,9 @@ dl.ui-select dd.ui-select-holder-list {
 	left: 0;
 }
 
+dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li a {
+	display: block;
+}
 
 
 
@@ -38,20 +41,21 @@ dl.ui-select dd.ui-select-holder-list {
  * Plugin Colors
  */
 dl.ui-select {
-	background: #FF2F41;
+	background: #ff2f41;
 	color: #fff;
+/*	width: 250px;*/
 }
 
 dl.ui-select dt.ui-select-handler {
-	background: #9E9B64;
+	background: #9e9b64;
 }
 
 dl.ui-select dd.ui-select-holder-list {
-	background: #FF2F41;
+	background: #ff2f41;
 }
 
 dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items {
-	background: #9E9B64;
+	background: #9e9b64;
 }
 
 dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li {
@@ -68,8 +72,8 @@ dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li a.selected {
 
 dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li a:hover,
 dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li a:focus {
-	background: #F2EBB7;
-	color: #3C4739;
+	background: #f2ebb7;
+	color: #3c4739;
 }
 
 
