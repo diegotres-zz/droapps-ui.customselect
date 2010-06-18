@@ -96,16 +96,13 @@ $.widget( "droapps-ui.customselect", {
 	},
 	
 	_render: function() {
+		this.skinned.fadeTo(0,0).insertAfter( this.element );
 		var skinned_before_width = this.skinned.outerWidth( true );
 		var skinned_width = skinned_before_width > this.element_width ? 
 							skinned_before_width : 
 							this.element_width;
-		
 		var pos = this.options.position;
-		
-		this.skinned
-			.insertAfter( this.element )
-			.width( skinned_width || 'auto' );
+		this.skinned.width( skinned_width || 'auto' );
 		
 		switch ( pos ) {
 			case 'top':
@@ -139,6 +136,8 @@ $.widget( "droapps-ui.customselect", {
 							.first()
 							.parent()
 							.outerHeight( true );
+							
+		this.skinned.fadeTo(0,1);
 		this.holder_list.hide();
 	},
 	
