@@ -26,6 +26,11 @@ dl.ui-select dd.ui-select-holder-list {
 	position: absolute;
 	z-index: 9999;
 	left: 0;
+	width: 100%;
+}
+
+dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li {
+	list-style: none;
 }
 
 dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li a {

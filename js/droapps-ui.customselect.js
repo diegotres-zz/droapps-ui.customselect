@@ -22,7 +22,7 @@ $.widget( "droapps-ui.customselect", {
 	options: {
 		value			: 0,
 		text			: '',
-		visible			: 5,
+		visible			: 'auto',
 		duration		: 300,
 		classname		: '',
 		selected_class	: 'selected',
@@ -107,10 +107,18 @@ $.widget( "droapps-ui.customselect", {
 	},
 	
 	_fixHeight: function() {
-		if( this.items.length > this.options.visible ) {
-			this.holder_items
-			.height( this.height_items * this.options.visible )
-			.css({ overflow: 'auto' });
+		var visible = this.options.visible;
+		switch ( visible ) {
+			case 'auto':
+				this.holder_items
+					.height( visible )
+					.css({ overflow: 'hidden' });
+				break;
+			case this.items.length > this.options.visible:
+				this.holder_items
+					.height( this.height_items * this.options.visible )
+					.css({ overflow: 'auto' });
+				break;
 		}
 	},
 	
