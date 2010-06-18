@@ -109,12 +109,24 @@ $.widget( "droapps-ui.customselect", {
 		
 		switch ( pos ) {
 			case 'top':
+			case 'up':
 				this.holder_list.css({
 					top		: 'auto',
 					bottom	: this.handler.outerHeight( true ) || 0
 				});
 				break;
+				
+			case 'middle':
+			case 'center':
+				this.holder_list.css({
+					top		: this.handler.outerHeight( true ),
+					bottom	: 'auto'
+				});
+				break;
+			
 			case 'bottom':
+			case 'down':
+			default:
 				this.holder_list.css({
 					top		: this.handler.outerHeight( true ),
 					bottom	: 'auto'
