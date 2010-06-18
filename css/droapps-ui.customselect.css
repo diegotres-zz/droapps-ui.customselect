@@ -1,8 +1,7 @@
-/* SKINNED SELECT
----------------------------------------- */
-
-/* Hide only visually, but have it available for screenreaders */
-.ui-select-skinned { 
+/**
+ * Plugin Structure
+ */
+select.ui-select-skinned { 
 	position: absolute; 
 	left: -9999px; 
 	top: auto; 
@@ -11,92 +10,76 @@
 	overflow: hidden;
 }
 
-.ui-select {
+dl.ui-select {
 	list-style: none;
-	background: #32796B;
-	padding: 5px;
-	width: 256px;
 	float: left;
-	margin-left: 10px;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
 	position: relative;
 	cursor: pointer;
 }
 
-.ui-select-handler {
-	background: #004638 url('/media/img/scrollbar-arrows.png') no-repeat right top;
+dl.ui-select dt.ui-select-handler {
 	display: block;
-	height: 30px;
-	line-height: 30px;
-	padding: 0 5px;
 	position: relative;
-	color: #fff;
 }
 
-.ui-select-handler:hover {
-	background-position: right -30px;
-}
-
-.active .ui-select-handler {
-	background-position: right -60px;
-}
-
-.active .ui-select-handler:hover {
-	background-position: right -90px;
-}
-
-.ui-select-holder-list {
+dl.ui-select dd.ui-select-holder-list {
 	position: absolute;
 	z-index: 9999;
-	background: #32796B;
-	padding: 0 5px 5px;
 	left: 0;
-/*	width: 256px;*/
-/*	width: 226px;*/
-	overflow: auto;
-	-moz-border-radius-bottomRight: 6px;
-	-moz-border-radius-bottomLeft: 6px;
-	-webkit-border-bottom-right-radius: 6px;
-	-webkit-border-bottom-left-radius: 6px;
 }
 
-.ui-select-holder-items {
-/*	width: 286px;*/
-/*	padding-right: 0 !important;*/
-}
 
-.ui-select-holder-items li {
-	list-style: none;
-}
 
-.ui-select-holder-items li a {
-	background: #004638;
-	display: block;
-	height: 30px;
-	line-height: 30px;
-	padding: 0 5px;
+
+
+
+
+/**
+ * Plugin Colors
+ */
+dl.ui-select {
+	background: #FF2F41;
 	color: #fff;
-	text-decoration: none;
 }
 
-.ui-select-holder-items li a.selected {
+dl.ui-select dt.ui-select-handler {
+	background: #9E9B64;
+}
+
+dl.ui-select dd.ui-select-holder-list {
+	background: #FF2F41;
+}
+
+dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items {
+	background: #9E9B64;
+}
+
+dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li {
+	
+}
+
+dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li a {
+	color: #fff;
+}
+
+dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li a.selected {
 	display: none;
 }
 
-.ui-select-holder-items li a:hover,
-.ui-select-holder-items li a:focus {
-	background: #32796B;
+dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li a:hover,
+dl.ui-select dd.ui-select-holder-list ul.ui-select-holder-items li a:focus {
+	background: #F2EBB7;
+	color: #3C4739;
 }
 
 
 
 
 
-/* Just do it
----------------------------------------- */
-.ui-select-holder-items {
-	width: 256px;
-/*	padding-right: 0 !important;*/
-}
+
+
+
+
+
+
+

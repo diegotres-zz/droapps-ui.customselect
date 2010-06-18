@@ -3,7 +3,7 @@
  * Creates a skinned version of a select tag form
  *
  * Author:
- *   Diego Tres /// a.k.a. D3
+ *   Diego Tres /// D3
  *
  * Contact:
  *   me@diegotres.com
