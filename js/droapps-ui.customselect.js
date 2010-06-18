@@ -23,6 +23,7 @@ $.widget( "droapps-ui.customselect", {
 		value			: 0,
 		text			: '',
 		visible			: 'auto',
+		position		: 'bottom',
 		duration		: 300,
 		classname		: '',
 		selected_class	: 'selected',
@@ -42,7 +43,9 @@ $.widget( "droapps-ui.customselect", {
 				'<dd class="ui-select-holder-list"><ul class="ui-select-holder-items" /></dd>' +
 			'</dl>'
 		);
-		this.skinned.addClass( self.options.classname || null );
+		this.skinned.addClass(function(){
+			return [ self.options.classname , self.options.position ].join(' ');
+		});
 		this.doc_body      = $( 'body' );
 		this.handler       = $( '.ui-select-handler' , this.skinned );
 		this.holder_list   = $( '.ui-select-holder-list' , this.skinned );
@@ -97,7 +100,28 @@ $.widget( "droapps-ui.customselect", {
 		var skinned_width = skinned_before_width > this.element_width ? 
 							skinned_before_width : 
 							this.element_width;
-		this.skinned.insertAfter( this.element ).width( skinned_width || 'auto' );
+		
+		var pos = this.options.position;
+		
+		this.skinned
+			.insertAfter( this.element )
+			.width( skinned_width || 'auto' );
+		
+		switch ( pos ) {
+			case 'top':
+				this.holder_list.css({
+					top		: 'auto',
+					bottom	: this.handler.outerHeight( true ) || 0
+				});
+				break;
+			case 'bottom':
+				this.holder_list.css({
+					top		: this.handler.outerHeight( true ),
+					bottom	: 'auto'
+				});
+				break;
+		}
+		
 		this.height_items = this.items
 							.not('.' + this.options.selected_class)
 							.first()
@@ -107,18 +131,14 @@ $.widget( "droapps-ui.customselect", {
 	},
 	
 	_fixHeight: function() {
-		var visible = this.options.visible;
-		switch ( visible ) {
-			case 'auto':
-				this.holder_items
-					.height( visible )
-					.css({ overflow: 'hidden' });
-				break;
-			case this.items.length > this.options.visible:
-				this.holder_items
-					.height( this.height_items * this.options.visible )
-					.css({ overflow: 'auto' });
-				break;
+		if ( typeof this.options.visible === 'number' && this.items.length > this.options.visible ) {
+			this.holder_items
+				.height( this.height_items * this.options.visible )
+				.css({ overflow: 'auto' });
+		} else {
+			this.holder_items
+				.height( 'auto' )
+				.css({ overflow: 'hidden' });
 		}
 	},
 	
