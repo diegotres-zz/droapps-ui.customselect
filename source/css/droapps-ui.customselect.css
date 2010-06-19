@@ -18,7 +18,11 @@ select.droapps-ui-customselect-skinned {
 
 /* resetting plugin elements */
 dl.droapps-ui-customselect,
-dl.droapps-ui-customselect * {
+dl.droapps-ui-customselect dt,
+dl.droapps-ui-customselect dd,
+dl.droapps-ui-customselect dd ul,
+dl.droapps-ui-customselect dd ul li,
+dl.droapps-ui-customselect dd ul li a {
 	margin: 0;
 	padding: 0;
 }
