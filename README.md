@@ -1,4 +1,8 @@
 [droapps](http://droapps.com/) - Custom Select
 ================================
 
-Just another skin for select tag form
+Just another skin for select tag form.
+
+example:
+========
+$('select').customselect();
