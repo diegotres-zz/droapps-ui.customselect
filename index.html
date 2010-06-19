@@ -15,7 +15,7 @@
 <body>
 
 	<!-- select that will be skinned -->
-	<select id="brands">
+	<select id="brands" disabled="disabled">
 		<option value="1">Apple</option>
 		<option value="2">Honda</option>
 		<option value="3">Marlboro</option>
@@ -31,7 +31,7 @@
 	<script>
 		$('select#brands').customselect({
 			visible: 5,
-			position: 'middle'
+			disabled: true
 		});
 	</script>
 

@@ -33,27 +33,33 @@ $.widget( "droapps-ui.customselect", {
 	_create: function() {
 		var self = this;
 		this.element_width = this.element.outerWidth( true );
-		this.element.addClass('ui-select-skinned');
+		this.element.addClass('droapps-ui-customselect-skinned');
+		this.options.disabled = this.element.is( ":disabled" );
 		this.items         = $( 'option' , this.element );
 		this.selected_item = $( ':selected' , this.element );
 		this.skinned       = $(
-			'<dl class="ui-select ui-widget ui-widget-content ui-corner-all">' +
-				'<dt class="ui-select-value ui-select-handler" />' +
-				'<dd class="ui-select-holder-list"><ul class="ui-select-holder-items" /></dd>' +
+			'<dl class="droapps-ui-customselect ui-widget ui-widget-content ui-corner-all">' +
+				'<dt class="droapps-ui-customselect-value droapps-ui-customselect-handler" />' +
+				'<dd class="droapps-ui-customselect-holder-list"><ul class="droapps-ui-customselect-holder-items" /></dd>' +
 			'</dl>'
 		);
 		this.skinned.addClass(function(){
 			return [ self.options.classname , self.options.position ].join(' ');
 		});
 		this.doc_body      = $( 'body' );
-		this.handler       = $( '.ui-select-handler' , this.skinned );
-		this.holder_list   = $( '.ui-select-holder-list' , this.skinned );
-		this.holder_items  = $( '.ui-select-holder-items' , this.skinned );
+		this.handler       = $( '.droapps-ui-customselect-handler' , this.skinned );
+		this.holder_list   = $( '.droapps-ui-customselect-holder-list' , this.skinned );
+		this.holder_items  = $( '.droapps-ui-customselect-holder-items' , this.skinned );
 		this._feed();
-		this.items         = $( '.ui-select-item' , this.holder_items );
+		this.items         = $( '.droapps-ui-customselect-item' , this.holder_items );
 		this._bind();
 		this._render();
 		this._fixHeight();
+		
+		// TODO: pull out $.Widget's handling for the disabled option into
+		// $.Widget.prototype._setOptionDisabled so it's easy to proxy and can
+		// be overridden by individual plugins
+		this._setOption( 'disabled' , this.options.disabled );
 	},
 	
 	_feed: function() {
@@ -68,7 +74,7 @@ $.widget( "droapps-ui.customselect", {
 			holder_items.append(
 				'<li>' +
 					'<a ' +
-						'class="ui-select-item '+ selected_class +'"' +
+						'class="droapps-ui-customselect-item '+ selected_class +'"' +
 						'rel="' + $(item).val() + '" ' +
 						'href="#">' + 
 							$(item).text() +
@@ -82,11 +88,18 @@ $.widget( "droapps-ui.customselect", {
 		var self = this;
 		this.doc_body.bind( 'click.select' , $.proxy( this._close , this ) );
 		this.skinned.bind( 'click.select' , function(e){ e.stopPropagation(); } );
-		this.handler.bind( 'click.select' , $.proxy( this._toggle , this ) );
-		this.holder_items.bind( 'click.select' , $.proxy( this._toggle , this ) );
+		this.handler.bind( 'click.select' , function(e) {
+			if( self.options.disabled ) { return; }
+			self._toggle( e );
+		});
+		this.holder_items.bind( 'click.select' , function(e) {
+			if( self.options.disabled ) { return; }
+			self._toggle( e );
+		});
 		this.items.bind( 'click.select-setvalues' , function(e) {
 			e.preventDefault();
 			e.stopPropagation();
+			if( self.options.disabled ) { return; }
 			self.value({
 				value: $(e.currentTarget).attr('rel'),
 				label: $(e.currentTarget).text()
@@ -203,7 +216,7 @@ $.widget( "droapps-ui.customselect", {
 	},
 
 	destroy: function() {
-		this.element.removeClass('ui-select-skinned');
+		this.element.removeClass('droapps-ui-customselect-skinned');
 		this.skinned.remove();
 		
 		$.Widget.prototype.destroy.apply( this, arguments );
@@ -227,17 +240,20 @@ $.widget( "droapps-ui.customselect", {
 		this._setOption( 'value' , val );
 		return this;
 	},
-
+	
 	_setOption: function( key, value ) {
+		$.Widget.prototype._setOption.apply( this, arguments );
+		
 		switch ( key ) {
 			case 'value':
 				this.options.value = value;
 				this.element.trigger( 'change' );
 				this._trigger( 'change', null, value );
 				break;
+			case 'disabled':
+				this.skinned[ value ? 'addClass' : 'removeClass']('disabled');
+				break;
 		}
-		
-		$.Widget.prototype._setOption.apply( this, arguments );
 	},
 
 	_value: function() {
