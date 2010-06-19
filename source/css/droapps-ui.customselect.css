@@ -14,6 +14,11 @@ select.droapps-ui-customselect-skinned {
 	width: 1px;
 	height: 1px;
 	overflow: hidden;
+}
+
+/* resetting plugin elements */
+dl.droapps-ui-customselect,
+dl.droapps-ui-customselect * {
 	margin: 0;
 	padding: 0;
 }
@@ -23,21 +28,15 @@ dl.droapps-ui-customselect {
 	float: left;
 	position: relative;
 	cursor: pointer;
-	margin: 0;
-	padding: 0;
 }
 
 dl.droapps-ui-customselect.droapps-ui-customselect-disabled {
 	cursor: default;
-	margin: 0;
-	padding: 0;
 }
 
 dl.droapps-ui-customselect dt.droapps-ui-customselect-handler {
 	display: block;
 	position: relative;
-	margin: 0;
-	padding: 0;
 }
 
 dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list {
@@ -45,20 +44,14 @@ dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list {
 	z-index: 9999;
 	left: 0;
 	width: 100%;
-	margin: 0;
-	padding: 0;
 }
 
 dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li {
 	list-style: none;
-	margin: 0;
-	padding: 0;
 }
 
 dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a {
 	display: block;
-	margin: 0;
-	padding: 0;
 }
 
 
