@@ -17,8 +17,8 @@
 		<!-- demos /// css -->
 		<style type="text/css" media="all">
 			* { margin: 0; padding: 0;}
-			body { font: 12px verdana, arial; background: #f1f1f1;}
-			body > div { width: 400px; margin: 250px auto; background: #fff; padding: 20px; border: 1px solid #999; position: relative; }
+			body { font: 12px verdana, arial; background: #f1f1f1; }
+			body > div { float: left; width: 400px; margin: 250px auto; background: #fff; padding: 20px; border: 1px solid #999; position: relative; }
 			dl.droapps-ui-customselect { margin: 0 auto; width: 200px; }
 			
 			
@@ -45,85 +45,26 @@
 				cursor: pointer;
 				overflow: hidden;
 			}
-			.jScrollPaneDragTop {
-				position: absolute;
-				top: 0;
-				left: 0;
-				overflow: hidden;
-			}
-			.jScrollPaneDragBottom {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				overflow: hidden;
-			}
-			
-			
-			
-			
-			/**
-			* Theme: Default
-			*/
-			dl.droapps-ui-customselect {
-				color: #80A39C;
-				font-family: 'trebuchet ms', verdana, arial, sans-serif;
-				font-size: 10px;
-				padding: 5px;
-				background: #33796B;
-				-moz-border-radius: 6px;
-				-webkit-border-radius: 6px;
-				border-radius: 6px;
-			}
 
-			dl.droapps-ui-customselect dt.droapps-ui-customselect-handler {
-				padding: 8px 5px;
-				background: #004638 url(arrows.png) no-repeat right top;
-			}
 			
-			dl.droapps-ui-customselect dt.droapps-ui-customselect-handler:hover {
-				background-position: right -30px;
-			}
 			
-			dl.droapps-ui-customselect.active dt.droapps-ui-customselect-handler {
-				background-position: right -60px;
-			}
 			
-			dl.droapps-ui-customselect.active dt.droapps-ui-customselect-handler:hover {
-				background-position: right -90px;
-			}
-
-			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list {
-				background: #33796B;
-				padding: 0 5px 5px 5px;
-				margin-top: -5px;
-				-moz-border-radius-bottomleft: 6px;
-				-moz-border-radius-bottomright: 6px;
-				-webkit-border-bottom-left-radius: 6px;
-				-webkit-border-bottom-right-radius: 6px;
-				width: 210px;
-			}
 			
-			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items {
-				background: #004638;
-			}
-
-			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li {
-			}
-
-			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a {
-				color: #80A39C;
-				padding: 8px 5px;
-			}
-
-			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a.selected {
-				color: #0C5F4E;
-			}
-
-			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a:hover,
-			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a:focus {
-				background: #32796B;
-				color: #fff;
-			}
+/**
+* Theme: Default
+*/
+dl.droapps-ui-customselect { font-family: 'trebuchet ms', verdana, arial, sans-serif; color: #80A39C; font-size: 10px; padding: 5px; background: #33796B; -moz-border-radius: 6px; -webkit-border-radius: 6px; border-radius: 6px; }
+dl.droapps-ui-customselect dt.droapps-ui-customselect-handler { background: #004638 url(arrows.png) no-repeat right top; padding: 8px 5px; }
+dl.droapps-ui-customselect dt.droapps-ui-customselect-handler:hover { background-position: right -30px; }
+dl.droapps-ui-customselect.active dt.droapps-ui-customselect-handler { background-position: right -60px; }
+dl.droapps-ui-customselect.active dt.droapps-ui-customselect-handler:hover { background-position: right -90px; }
+dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list { background: #33796B; padding: 0 5px 5px 5px; margin-top: -5px; width: 210px; -moz-border-radius-bottomleft: 6px; -moz-border-radius-bottomright: 6px; -webkit-border-bottom-left-radius: 6px; -webkit-border-bottom-right-radius: 6px; }
+dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items { background: #004638; }
+dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li {}
+dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a { color: #80A39C; padding: 8px 5px; }
+dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a.selected { color: #0C5F4E; }
+dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a:hover,
+dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a:focus { background: #32796B; color: #fff; }
 			
 		</style>
 		

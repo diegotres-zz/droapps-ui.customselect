@@ -125,9 +125,7 @@ $.widget( "droapps-ui.customselect", {
 		// we insert the skinned element before all operations
 		// because we need to get some values that's
 		// only possible when element is at dom.
-		this.skinned
-			.fadeTo(0,0)
-			.insertAfter( this.element );
+		this.skinned.insertAfter( this.element );
 	},
 	
 	_position: function() {
@@ -180,17 +178,16 @@ $.widget( "droapps-ui.customselect", {
 			skinned_before_width = this.skinned.outerWidth( true ),
 			skinned_width        = skinned_before_width > this.element_width ? skinned_before_width : this.element_width,
 			skinned_height       = this.skinned.outerHeight( true );
+		
 			
-		this.skinned
-			.width( skinned_width || 'auto' )
-			.fadeTo(0,1);
+		this.skinned.width( skinned_width || 'auto' );
 			
 		this.height_items = this.items
 							.not('.' + o.selected_class)
 							.first()
 							.parent()
 							.outerHeight( true );
-
+							
 		if ( typeof o.visible === 'number' && this.items.length > o.visible ) {
 
 			this.holder_list_height = this.height_items * o.visible;
