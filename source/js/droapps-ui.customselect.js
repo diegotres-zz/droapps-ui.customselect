@@ -225,83 +225,56 @@ $.widget( "droapps-ui.customselect", {
 	_open: function( e ) {
 		var self    = this,
 			o       = this.options,
-			context = o.context ? o.context : this.skinned;
-		
-		// this.holder_list_height = this.height_items * this.items.not('.selected').length;
+			context = o.context ? o.context : this.skinned,
+			top     = this.holder_list.css('top');
 		
 		if( this.holder_list.not(':visible') ) {
+			
 			if ( o.position == 'middle' || o.position == 'center' ) {
-				
-				this.holder_list
-					.height(0)
-					.css({display: 'block'})
-					.animate({
-						top		: -this.holder_list_height/2 + this.skinned.outerHeight( true )/2,
-						height	: this.holder_list_height
-					},{
-						duration: o.duration,
-						easing	: o.easing,
-						complete: function() {
-							if( o.open ) { o.open.apply( context , arguments ); }
-						}
-					});
-					
-			} else {
-				
-				this.holder_list
-					.height(0)
-					.css({ display: 'block' })
-					.animate({
-						height	: this.holder_list_height
-					},{
-						duration: o.duration,
-						easing	: o.easing,
-						complete: function() {
-							if( o.open ) { o.open.apply( context , arguments ); }
-						}
-					});
-					
+				top = - this.holder_list_height / 2 + this.skinned.outerHeight( true ) / 2;
 			}
+			
+			this.holder_list
+				.height(0)
+				.css({ display: 'block' })
+				.animate({
+					top		: top,
+					height	: this.holder_list_height
+				},{
+					duration: o.duration,
+					easing	: o.easing,
+					complete: function() {
+						if( o.open ) { o.open.apply( context , arguments ); }
+					}
+				});
 		}
 	},
 	
 	_close: function( e ) {
 		var self    = this,
 			o       = this.options,
-			context = o.context ? o.context : this.skinned;
-		
+			context = o.context ? o.context : this.skinned,
+			top     = this.holder_list.css('top');
+			
 		if( this.holder_list.is(':visible') ) {
+			
 			if ( o.position == 'middle' || o.position == 'center' ) {
-				
-				this.holder_list
-					.animate({
-						top		: this.skinned.outerHeight( true )/2,
-						height	: 0
-					},{
-						duration: o.duration,
-						easing	: o.easing,
-						complete: function() {
-							$(this).height(0).css({display: 'none'});
-							if( o.close ) { o.close.apply( context , arguments ); }
-						}
-					});
-					
-			} else {
-				
-				this.holder_list
-					.css({ overflow: 'hidden'})
-					.animate({
-						height	: 0
-					},{
-						duration: o.duration,
-						easing	: o.easing,
-						complete: function() {
-							$(this).height(0).css({display: 'none'});
-							if( o.close ) { o.close.apply( context , arguments ); }
-						}
-					});
-					
+				top = this.skinned.outerHeight( true )/2;
 			}
+			
+			this.holder_list
+				.css({ overflow: 'hidden'})
+				.animate({
+					top		: top,
+					height	: 0
+				},{
+					duration: o.duration,
+					easing	: o.easing,
+					complete: function() {
+						$(this).height(0).css({display: 'none'});
+						if( o.close ) { o.close.apply( context , arguments ); }
+					}
+				});
 		}
 	},
 
