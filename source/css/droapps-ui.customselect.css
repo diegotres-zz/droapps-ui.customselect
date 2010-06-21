@@ -50,6 +50,10 @@ dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list {
 	width: 100%;
 }
 
+dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items {
+	position: relative;
+}
+
 dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li {
 	list-style: none;
 }

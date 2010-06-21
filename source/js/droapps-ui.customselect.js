@@ -28,8 +28,10 @@ $.widget( "droapps-ui.customselect", {
 		easing			: 'linear',
 		classname		: 'd3',
 		selected_class	: 'selected',
-		open			: null,
-		close			: null
+		beforeOpen		: null,
+		beforeClose		: null,
+		onOpen			: null,
+		onClose			: null
 	},
 	
 	_create: function() {
@@ -231,6 +233,10 @@ $.widget( "droapps-ui.customselect", {
 				top = - this.holder_list_height / 2 + this.skinned.outerHeight( true ) / 2;
 			}
 			
+			if( o.beforeOpen ) { o.beforeOpen.apply( context , arguments ); }
+			
+			this.skinned.addClass('active');
+			
 			this.holder_list
 				.height(0)
 				.css({ display: 'block' })
@@ -241,7 +247,7 @@ $.widget( "droapps-ui.customselect", {
 					duration: o.duration,
 					easing	: o.easing,
 					complete: function() {
-						if( o.open ) { o.open.apply( context , arguments ); }
+						if( o.onOpen ) { o.onOpen.apply( context , arguments ); }
 					}
 				});
 		}
@@ -259,6 +265,10 @@ $.widget( "droapps-ui.customselect", {
 				top = this.skinned.outerHeight( true )/2;
 			}
 			
+			if( o.beforeClose ) { o.beforeClose.apply( context , arguments ); }
+			
+			this.skinned.removeClass('active');
+			
 			this.holder_list
 				.css({ overflow: 'hidden'})
 				.animate({
@@ -269,7 +279,7 @@ $.widget( "droapps-ui.customselect", {
 					easing	: o.easing,
 					complete: function() {
 						$(this).height(0).css({display: 'none'});
-						if( o.close ) { o.close.apply( context , arguments ); }
+						if( o.onClose ) { o.onClose.apply( context , arguments ); }
 					}
 				});
 		}

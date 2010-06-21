@@ -7,10 +7,9 @@
 		<!-- dependencies -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.js"></script>
+		<script src="http://www.kelvinluck.com/assets/jquery/jScrollPane/scripts/jScrollPane.js"></script>
 		
 		<!-- plugin files -->
-		<!-- <link href="http://github.com/diegotres/droapps-ui.customselect/raw/master/source/css/droapps-ui.customselect.css" rel="stylesheet" type="text/css" media="all" /> -->
-		<!--<script src="http://github.com/diegotres/droapps-ui.customselect/raw/master/source/js/droapps-ui.customselect.js"></script>-->
 		<link href="../source/css/droapps-ui.customselect.css" rel="stylesheet" type="text/css" media="all" />
 		<script src="../source/js/droapps-ui.customselect.js"></script>
 		
@@ -19,8 +18,48 @@
 		<style type="text/css" media="all">
 			* { margin: 0; padding: 0;}
 			body { font: 12px verdana, arial; background: #f1f1f1;}
-			div { width: 400px; margin: 250px auto; background: #fff; padding: 20px; border: 1px solid #999; position: relative; }
+			body > div { width: 400px; margin: 250px auto; background: #fff; padding: 20px; border: 1px solid #999; position: relative; }
 			dl.droapps-ui-customselect { margin: 0 auto; width: 200px; }
+			
+			
+			
+			/* jscrollpane
+			---------------------------------------- */
+			.jScrollPaneContainer {
+				position: relative;
+				overflow: hidden;
+				z-index: 1;
+			}
+
+			.jScrollPaneTrack {
+				position: absolute;
+				cursor: pointer;
+				right: 0;
+				top: 0;
+				height: 100%;
+				background: #005746;
+			}
+			.jScrollPaneDrag {
+				position: absolute;
+				background: #296F62;
+				cursor: pointer;
+				overflow: hidden;
+			}
+			.jScrollPaneDragTop {
+				position: absolute;
+				top: 0;
+				left: 0;
+				overflow: hidden;
+			}
+			.jScrollPaneDragBottom {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				overflow: hidden;
+			}
+			
+			
+			
 			
 			/**
 			* Theme: Default
@@ -37,8 +76,20 @@
 			}
 
 			dl.droapps-ui-customselect dt.droapps-ui-customselect-handler {
-				padding: 10px 5px;
-				background: #004638;
+				padding: 8px 5px;
+				background: #004638 url(arrows.png) no-repeat right top;
+			}
+			
+			dl.droapps-ui-customselect dt.droapps-ui-customselect-handler:hover {
+				background-position: right -30px;
+			}
+			
+			dl.droapps-ui-customselect.active dt.droapps-ui-customselect-handler {
+				background-position: right -60px;
+			}
+			
+			dl.droapps-ui-customselect.active dt.droapps-ui-customselect-handler:hover {
+				background-position: right -90px;
 			}
 
 			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list {
@@ -51,7 +102,7 @@
 				-webkit-border-bottom-right-radius: 6px;
 				width: 210px;
 			}
-
+			
 			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items {
 				background: #004638;
 			}
@@ -61,7 +112,7 @@
 
 			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a {
 				color: #80A39C;
-				padding: 10px 5px;
+				padding: 8px 5px;
 			}
 
 			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a.selected {
@@ -95,7 +146,14 @@
 				
 				// demo 4
 				$('#demo-4 > select').customselect({
-					visible: 5
+					visible: 5,
+					onOpen: function() {
+						var el = $( 'ul' , this );
+						el.jScrollPane({
+							scrollbarWidth: 30,
+							scrollbarMargin: 0
+						});
+					}
 				});
 				
 				// demo 5
@@ -160,7 +218,7 @@
 	</div>
 	
 	<div id="demo-4">
-		<h2>Bottom with limit</h2>
+		<h2>Bottom with limit and jscrollpane</h2>
 		<select>
 			<option value="1">Apple</option>
 			<option value="2">Honda</option>
