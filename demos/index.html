@@ -2,53 +2,65 @@
 <html lang="pt-br" dir="ltr">
 	<head>
 		<meta charset="utf-8" />
-		<title>jQuery UI Custom Select</title>
-		
-		<!-- common css -->
-		<link rel="stylesheet" href="css/reset.css" type="text/css" media="all" />
-		
+		<title>DROAPPS-UI CustomSelect /// demos</title>
+
 		<!-- dependencies -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.js"></script>
 		
 		<!-- plugin files -->
-		<link href="css/droapps-ui.customselect.css" rel="stylesheet" type="text/css" media="all" />
-		<script src="js/droapps-ui.customselect.js"></script>
+		<link href="http://github.com/diegotres/droapps-ui.customselect/raw/master/source/css/droapps-ui.customselect.css" rel="stylesheet" type="text/css" media="all" />
+		<!--<script src="http://github.com/diegotres/droapps-ui.customselect/raw/master/source/js/droapps-ui.customselect.js"></script>-->
+		<script src="../source/js/droapps-ui.customselect.js"></script>
 		
 		
-		<!-- demos : css -->
+		<!-- demos /// css -->
 		<style type="text/css" media="all">
-			/* reset and base */
-			* {
-				margin: 0;
-				padding: 0;
-			}
-
-			body {
-				padding: 250px 300px;
-				background: #3C4739;
-				font: 12px 'trebuchet ms', arial, sans-serif;
-			}
+			* { margin: 0; padding: 0;}
+			body { font: 12px verdana, arial; background: #f1f1f1;}
+			div { width: 960px; margin: 20px auto; background: #fff; padding: 20px; height: 500px; border: 1px solid #999; }
 		</style>
 		
 		
-		<!-- demos : js -->
+		<!-- demos /// js -->
 		<script>
 			$( document ).ready(function(){
 				// demo 1
 				$('#demo-1 > select').customselect();
 				
 				// demo 2
-				$('#demo-2 > select').customselect();
+				$('#demo-2 > select').customselect({
+					position: 'top' // or up
+				});
 				
 				// demo 3
-				$('#demo-3 > select').customselect();
+				$('#demo-3 > select').customselect({
+					position: 'middle' // or center
+				});
+				
+				// demo 4
+				$('#demo-4 > select').customselect({
+					visible: 5
+				});
+				
+				// demo 5
+				$('#demo-5 > select').customselect({
+					visible: 5,
+					position: 'top'
+				});
+				
+				// demo 6
+				$('#demo-6 > select').customselect({
+					visible: 5,
+					position: 'middle'
+				});
 			});
 		</script>
 	</head>
 <body>
 	
 	<div id="demo-1">
+		<h2>Default</h2>
 		<select>
 			<option value="1">Apple</option>
 			<option value="2">Honda</option>
@@ -63,6 +75,7 @@
 	</div>
 	
 	<div id="demo-2">
+		<h2>Top</h2>
 		<select>
 			<option value="1">Apple</option>
 			<option value="2">Honda</option>
@@ -77,6 +90,52 @@
 	</div>
 	
 	<div id="demo-3">
+		<h2>Middle</h2>
+		<select>
+			<option value="1">Apple</option>
+			<option value="2">Honda</option>
+			<option value="3">Marlboro</option>
+			<option value="4">Starbucks</option>
+			<option value="5">Burguer King</option>
+			<option value="6">Porsche</option>
+			<option value="7">New Era</option>
+			<option value="8">Oakley</option>
+			<option value="9">Gibson</option>
+		</select>
+	</div>
+	
+	<div id="demo-4">
+		<h2>Bottom with limit</h2>
+		<select>
+			<option value="1">Apple</option>
+			<option value="2">Honda</option>
+			<option value="3">Marlboro</option>
+			<option value="4">Starbucks</option>
+			<option value="5">Burguer King</option>
+			<option value="6">Porsche</option>
+			<option value="7">New Era</option>
+			<option value="8">Oakley</option>
+			<option value="9">Gibson</option>
+		</select>
+	</div>
+	
+	<div id="demo-5">
+		<h2>Top with limit</h2>
+		<select>
+			<option value="1">Apple</option>
+			<option value="2">Honda</option>
+			<option value="3">Marlboro</option>
+			<option value="4">Starbucks</option>
+			<option value="5">Burguer King</option>
+			<option value="6">Porsche</option>
+			<option value="7">New Era</option>
+			<option value="8">Oakley</option>
+			<option value="9">Gibson</option>
+		</select>
+	</div>
+	
+	<div id="demo-6">
+		<h2>Middle with limit</h2>
 		<select>
 			<option value="1">Apple</option>
 			<option value="2">Honda</option>

@@ -163,11 +163,12 @@ $.widget( "droapps-ui.customselect", {
 	_fixHeight: function() {
 		if ( typeof this.options.visible === 'number' && this.items.length > this.options.visible ) {
 			this.holder_list_height = this.height_items * this.options.visible;
+			console.log( this.holder_list_height );
 			this.holder_items
 				.height( this.holder_list_height )
 				.css({ overflowY: 'auto', overflowX: 'hidden' });
 		} else {
-			this.holder_list_height = 0;
+			this.holder_list_height = this.height_items * this.items.length;
 			this.holder_items
 				.height( 'auto' )
 				.css({ overflow: 'hidden' });
