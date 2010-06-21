@@ -22,8 +22,6 @@
 $.widget( "droapps-ui.customselect", {
 	
 	options: {
-		value			: 0,
-		text			: '',
 		visible			: 'auto',
 		position		: 'bottom',
 		duration		: 200,
@@ -40,7 +38,7 @@ $.widget( "droapps-ui.customselect", {
 			
 		this.element_width = this.element.outerWidth( true );
 		o.disabled         = this.element.is( ":disabled" );
-		this.items         = $( 'option' , this.element );
+		this.element_items = $( 'option' , this.element );
 		this.selected_item = $( ':selected' , this.element );
 		this.skinned       = $(
 			'<dl class="droapps-ui-customselect ui-widget ui-widget-content ui-corner-all">' +
@@ -57,7 +55,6 @@ $.widget( "droapps-ui.customselect", {
 		this.holder_list   = $( '.droapps-ui-customselect-holder-list' , this.skinned );
 		this.holder_items  = $( '.droapps-ui-customselect-holder-items' , this.skinned );
 		this._feed();
-		this.items         = $( '.droapps-ui-customselect-item' , this.holder_items );
 		this._bind();
 		this._render();
 		this._dimensions();
@@ -72,14 +69,13 @@ $.widget( "droapps-ui.customselect", {
 	_feed: function() {
 		var self           = this,
 			o              = this.options,
-			val            = this.selected_item.val() || o.value,
+			val            = this.selected_item.val(),
 			holder_items   = this.holder_items,
 			selected_class = '';
 		
-		this.handler.text( this.selected_item.text() || o.text );
-		this.items.each(function( i , item ){
+		this.handler.text( this.selected_item.text() );
+		this.element_items.each(function( i , item ){
 			selected_class = val == $(item).val() ? o.selected_class : '';
-			// console.log( $(item).val() );
 			holder_items.append(
 				'<li>' +
 					'<a ' +
@@ -91,6 +87,7 @@ $.widget( "droapps-ui.customselect", {
 				'</li>'
 			);
 		});
+		this.items = $( '.droapps-ui-customselect-item' , this.holder_items );
 	},
 	
 	_bind: function() {
@@ -288,8 +285,8 @@ $.widget( "droapps-ui.customselect", {
 	value: function( new_value ) {
 		var self    = this,
 			o       = this.options,
-			val     = new_value.value || o.value,
-			txt     = new_value.label || o.text;
+			val     = new_value.value,
+			txt     = new_value.label;
 		
 		this.items
 			.removeClass( o.selected_class )
