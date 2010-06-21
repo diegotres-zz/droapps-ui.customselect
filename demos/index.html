@@ -147,6 +147,9 @@
 				// demo 4
 				$('#demo-4 > select').customselect({
 					visible: 5,
+					beforeOpen: function() {
+						$( 'ul' , this ).css({ overflow: 'hidden' });
+					},
 					onOpen: function() {
 						var el = $( 'ul' , this );
 						el.jScrollPane({
