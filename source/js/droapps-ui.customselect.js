@@ -72,13 +72,14 @@ $.widget( "droapps-ui.customselect", {
 	_feed: function() {
 		var self           = this,
 			o              = this.options,
-			val            = this.selected_item.attr('rel') || o.value,
+			val            = this.selected_item.val() || o.value,
 			holder_items   = this.holder_items,
 			selected_class = '';
 		
 		this.handler.text( this.selected_item.text() || o.text );
 		this.items.each(function( i , item ){
 			selected_class = val == $(item).val() ? o.selected_class : '';
+			// console.log( $(item).val() );
 			holder_items.append(
 				'<li>' +
 					'<a ' +
@@ -113,7 +114,7 @@ $.widget( "droapps-ui.customselect", {
 		this.items.bind( 'click.select-setvalues' , function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			if( self.options.disabled ) { return; }
+			if( self.options.disabled || $(e.currentTarget).hasClass( o.selected_class ) ) { return; }
 			self.value({
 				value: $(e.currentTarget).attr('rel'),
 				label: $(e.currentTarget).text()
@@ -225,6 +226,8 @@ $.widget( "droapps-ui.customselect", {
 		var self    = this,
 			o       = this.options,
 			context = o.context ? o.context : this.skinned;
+		
+		// this.holder_list_height = this.height_items * this.items.not('.selected').length;
 		
 		if( this.holder_list.not(':visible') ) {
 			if ( o.position == 'middle' || o.position == 'center' ) {

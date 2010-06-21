@@ -56,14 +56,18 @@ dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-
 
 dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a {
 	display: block;
+	text-decoration: none;
 }
 
+dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a.selected {
+	cursor: default;
+}
 
 
 /**
 * Theme: Default
 */
-dl.droapps-ui-customselect {
+/*dl.droapps-ui-customselect {
 	background: #ff2f41;
 	color: #fff;
 }
@@ -98,3 +102,4 @@ dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-
 	color: #3c4739;
 }
 
+*/
