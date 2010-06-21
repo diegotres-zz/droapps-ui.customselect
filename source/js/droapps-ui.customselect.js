@@ -28,17 +28,18 @@ $.widget( "droapps-ui.customselect", {
 		position		: 'bottom',
 		duration		: 200,
 		easing			: 'linear',
-		classname		: '',
+		classname		: 'd3',
 		selected_class	: 'selected',
 		open			: null,
 		close			: null
 	},
 	
 	_create: function() {
-		var self = this;
+		var self 	= this
+			o		= this.options;
+			
 		this.element_width = this.element.outerWidth( true );
-		this.element.addClass('droapps-ui-customselect-skinned');
-		this.options.disabled = this.element.is( ":disabled" );
+		o.disabled         = this.element.is( ":disabled" );
 		this.items         = $( 'option' , this.element );
 		this.selected_item = $( ':selected' , this.element );
 		this.skinned       = $(
@@ -47,8 +48,9 @@ $.widget( "droapps-ui.customselect", {
 				'<dd class="droapps-ui-customselect-holder-list"><ul class="droapps-ui-customselect-holder-items" /></dd>' +
 			'</dl>'
 		);
+		this.element.addClass('droapps-ui-customselect-skinned');
 		this.skinned.addClass(function(){
-			return [ self.options.classname , self.options.position ].join(' ');
+			return [ o.classname , o.position ].join(' ');
 		});
 		this.doc_body      = $( 'body' );
 		this.handler       = $( '.droapps-ui-customselect-handler' , this.skinned );
@@ -58,7 +60,8 @@ $.widget( "droapps-ui.customselect", {
 		this.items         = $( '.droapps-ui-customselect-item' , this.holder_items );
 		this._bind();
 		this._render();
-		this._fixHeight();
+		this._dimensions();
+		this._position();
 		
 		// TODO: pull out $.Widget's handling for the disabled option into
 		// $.Widget.prototype._setOptionDisabled so it's easy to proxy and can
@@ -67,14 +70,15 @@ $.widget( "droapps-ui.customselect", {
 	},
 	
 	_feed: function() {
-		var self         = this,
-			val          = this.selected_item.attr('rel') || this.options.value,
-			holder_items = this.holder_items,
-			selected_class;
+		var self           = this,
+			o              = this.options,
+			val            = this.selected_item.attr('rel') || o.value,
+			holder_items   = this.holder_items,
+			selected_class = '';
 		
-		this.handler.text( this.selected_item.text() || this.options.text );
+		this.handler.text( this.selected_item.text() || o.text );
 		this.items.each(function( i , item ){
-			selected_class = val == $(item).val() ? self.options.selected_class : '';
+			selected_class = val == $(item).val() ? o.selected_class : '';
 			holder_items.append(
 				'<li>' +
 					'<a ' +
@@ -89,17 +93,23 @@ $.widget( "droapps-ui.customselect", {
 	},
 	
 	_bind: function() {
-		var self = this;
+		var self = this,
+			o    = this.options;
+			
 		this.doc_body.bind( 'click.select' , $.proxy( this._close , this ) );
+		
 		this.skinned.bind( 'click.select' , function(e){ e.stopPropagation(); } );
+		
 		this.handler.bind( 'click.select' , function(e) {
 			if( self.options.disabled ) { return; }
 			self._toggle( e );
 		});
+		
 		this.holder_items.bind( 'click.select' , function(e) {
 			if( self.options.disabled ) { return; }
 			self._toggle( e );
 		});
+		
 		this.items.bind( 'click.select-setvalues' , function(e) {
 			e.preventDefault();
 			e.stopPropagation();
@@ -112,82 +122,113 @@ $.widget( "droapps-ui.customselect", {
 	},
 	
 	_render: function() {
-		this.skinned.fadeTo(0,0).insertAfter( this.element );
-		var skinned_before_width = this.skinned.outerWidth( true );
-		var skinned_width = skinned_before_width > this.element_width ? 
-							skinned_before_width : 
-							this.element_width;
-		var pos = this.options.position;
-		this.skinned.width( skinned_width || 'auto' );
-		
+		// we insert the skinned element before all operations
+		// because we need to get some values that's
+		// only possible when element is at dom.
+		this.skinned
+			.fadeTo(0,0)
+			.insertAfter( this.element );
+	},
+	
+	_position: function() {
+		var self                 = this,
+			o                    = this.options,
+			skinned_height       = this.skinned.outerHeight( true ),
+			pos                  = this.options.position,
+			holder_list_css      = {};
+			
 		switch ( pos ) {
 			case 'top':
 			case 'up':
-				this.holder_list.css({
+				holder_list_css = {
 					top		: 'auto',
-					bottom	: this.skinned.outerHeight( true ) || 0
-				});
+					bottom	: skinned_height || 0
+				};
 				break;
 				
 			case 'middle':
 			case 'center':
-				this.holder_list.css({
-					top		: this.skinned.outerHeight( true )/2,
+				holder_list_css = {
+					top		: skinned_height / 2,
 					bottom	: 'auto'
-				});
+				};
 				break;
 			
 			case 'bottom':
 			case 'down':
-				this.holder_list.css({
-					top		: this.skinned.outerHeight( true ),
+				holder_list_css = {
+					top		: skinned_height,
 					bottom	: 'auto'
-				});
+				};
 				break;
+				
 			default:
-				this.holder_list.css({
-					top		: this.skinned.outerHeight( true ),
+				holder_list_css = {
+					top		: skinned_height,
 					bottom	: 'auto'
-				});
+				};
 		}
 		
+		this.holder_list
+			.css( holder_list_css )
+			.hide();
+	},
+	
+	_dimensions: function() {
+		var self                 = this,
+			o                    = this.options,
+			skinned_before_width = this.skinned.outerWidth( true ),
+			skinned_width        = skinned_before_width > this.element_width ? skinned_before_width : this.element_width,
+			skinned_height       = this.skinned.outerHeight( true );
+			
+		this.skinned
+			.width( skinned_width || 'auto' )
+			.fadeTo(0,1);
+			
 		this.height_items = this.items
-							.not('.' + this.options.selected_class)
+							.not('.' + o.selected_class)
 							.first()
 							.parent()
 							.outerHeight( true );
-							
-		this.skinned.fadeTo(0,1);
-		this.holder_list.hide();
-	},
-	
-	_fixHeight: function() {
-		if ( typeof this.options.visible === 'number' && this.items.length > this.options.visible ) {
-			this.holder_list_height = this.height_items * this.options.visible;
+
+		if ( typeof o.visible === 'number' && this.items.length > o.visible ) {
+
+			this.holder_list_height = this.height_items * o.visible;
+
 			this.holder_items
 				.height( this.holder_list_height )
 				.css({ overflowY: 'auto', overflowX: 'hidden' });
+
 		} else {
+
 			this.holder_list_height = this.height_items * this.items.length;
+
 			this.holder_items
 				.height( 'auto' )
 				.css({ overflow: 'hidden' });
+
 		}
 	},
 	
 	_toggle: function( e ) {
 		e.stopPropagation();
 		e.preventDefault();
-		if( this.holder_list.is(':visible') ) { this._close(e); } 
-		else { this._open(e); }
+		
+		if( this.holder_list.is(':visible') ) { 
+			this._close(e);
+		} else { 
+			this._open(e);
+		}
 	},
 	
 	_open: function( e ) {
 		var self    = this,
-			context = this.options.context ? this.options.context : this.skinned;
+			o       = this.options,
+			context = o.context ? o.context : this.skinned;
 		
 		if( this.holder_list.not(':visible') ) {
-			if ( this.options.position == 'middle' || this.options.position == 'center' ) {
+			if ( o.position == 'middle' || o.position == 'center' ) {
+				
 				this.holder_list
 					.height(0)
 					.css({display: 'block'})
@@ -195,60 +236,68 @@ $.widget( "droapps-ui.customselect", {
 						top		: -this.holder_list_height/2 + this.skinned.outerHeight( true )/2,
 						height	: this.holder_list_height
 					},{
-						duration: this.options.duration,
-						easing	: this.options.easing,
+						duration: o.duration,
+						easing	: o.easing,
 						complete: function() {
-							if( self.options.open ) { self.options.open.apply( context , arguments ); }
+							if( o.open ) { o.open.apply( context , arguments ); }
 						}
 					});
+					
 			} else {
+				
 				this.holder_list
 					.height(0)
 					.css({ display: 'block' })
 					.animate({
 						height	: this.holder_list_height
 					},{
-						duration: this.options.duration,
-						easing	: this.options.easing,
+						duration: o.duration,
+						easing	: o.easing,
 						complete: function() {
-							if( self.options.open ) { self.options.open.apply( context , arguments ); }
+							if( o.open ) { o.open.apply( context , arguments ); }
 						}
 					});
+					
 			}
 		}
 	},
 	
 	_close: function( e ) {
 		var self    = this,
-			context = this.options.context ? this.options.context : this.skinned;
+			o       = this.options,
+			context = o.context ? o.context : this.skinned;
 		
 		if( this.holder_list.is(':visible') ) {
-			if ( this.options.position == 'middle' || this.options.position == 'center' ) {
+			if ( o.position == 'middle' || o.position == 'center' ) {
+				
 				this.holder_list
 					.animate({
 						top		: this.skinned.outerHeight( true )/2,
 						height	: 0
 					},{
-						duration: this.options.duration,
-						easing	: this.options.easing,
+						duration: o.duration,
+						easing	: o.easing,
 						complete: function() {
 							$(this).height(0).css({display: 'none'});
-							if( self.options.close ) { self.options.close.apply( context , arguments ); }
+							if( o.close ) { o.close.apply( context , arguments ); }
 						}
 					});
+					
 			} else {
+				
 				this.holder_list
 					.css({ overflow: 'hidden'})
 					.animate({
 						height	: 0
 					},{
-						duration: this.options.duration,
-						easing	: this.options.easing,
+						duration: o.duration,
+						easing	: o.easing,
 						complete: function() {
 							$(this).height(0).css({display: 'none'});
-							if( self.options.close ) { self.options.close.apply( context , arguments ); }
+							if( o.close ) { o.close.apply( context , arguments ); }
 						}
 					});
+					
 			}
 		}
 	},
@@ -261,13 +310,15 @@ $.widget( "droapps-ui.customselect", {
 	},
 	
 	value: function( new_value ) {
-		var val = new_value.value || this.options.value,
-			txt = new_value.label || this.options.text;
+		var self    = this,
+			o       = this.options,
+			val     = new_value.value || o.value,
+			txt     = new_value.label || o.text;
 		
 		this.items
-			.removeClass( this.options.selected_class )
+			.removeClass( o.selected_class )
 			.filter('[rel='+ val +']')
-			.addClass( this.options.selected_class );
+			.addClass( o.selected_class );
 		
 		this.element.val( val );
 		this.handler.text( txt );
@@ -280,11 +331,14 @@ $.widget( "droapps-ui.customselect", {
 	},
 	
 	_setOption: function( key, value ) {
+		var self    = this,
+			o       = this.options;
+			
 		$.Widget.prototype._setOption.apply( this, arguments );
 		
 		switch ( key ) {
 			case 'value':
-				this.options.value = value;
+				o.value = value;
 				this.element.trigger( 'change' );
 				this._trigger( 'change', null, value );
 				break;
@@ -295,7 +349,10 @@ $.widget( "droapps-ui.customselect", {
 	},
 
 	_value: function() {
-		return this.options.value;
+		var self    = this,
+			o       = this.options;
+			
+		return o.value;
 	},
 	
 	widget: function() {
