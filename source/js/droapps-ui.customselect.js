@@ -52,7 +52,7 @@ $.widget( "droapps-ui.customselect", {
 		this.skinned.addClass(function(){
 			return [ o.classname , o.position ].join(' ');
 		});
-		this.doc_body      = $( 'body' );
+		this.doc_body      = $( document );
 		this.handler       = $( '.droapps-ui-customselect-handler' , this.skinned );
 		this.holder_list   = $( '.droapps-ui-customselect-holder-list' , this.skinned );
 		this.holder_items  = $( '.droapps-ui-customselect-holder-items' , this.skinned );
