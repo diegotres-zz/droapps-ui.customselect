@@ -225,7 +225,9 @@ $.widget( "droapps-ui.customselect", {
 		var self    = this,
 			o       = this.options,
 			context = o.context ? o.context : this.skinned,
-			top     = this.holder_list.css('top');
+			top     = this.holder_list.css('top'),
+			bottom  = this.holder_list.css('bottom'),
+			animate = {};
 		
 		if( this.holder_list.not(':visible') ) {
 			
@@ -237,13 +239,16 @@ $.widget( "droapps-ui.customselect", {
 			
 			this.skinned.addClass('active');
 			
+			// verified properties because ie have an problem with 'auto' value
+			if( top != 'auto' ) { animate.top = top; }
+			if( bottom != 'auto' ) { animate.bottom = bottom; }
+			animate.height =  this.holder_list_height;
+			
 			this.holder_list
 				.height(0)
 				.css({ display: 'block' })
-				.animate({
-					top		: top,
-					height	: this.holder_list_height
-				},{
+				.animate( animate ,
+				{
 					duration: o.duration,
 					easing	: o.easing,
 					complete: function() {
@@ -257,7 +262,9 @@ $.widget( "droapps-ui.customselect", {
 		var self    = this,
 			o       = this.options,
 			context = o.context ? o.context : this.skinned,
-			top     = this.holder_list.css('top');
+			top     = this.holder_list.css('top'),
+			bottom  = this.holder_list.css('bottom'),
+			animate = {};
 			
 		if( this.holder_list.is(':visible') ) {
 			
@@ -269,12 +276,15 @@ $.widget( "droapps-ui.customselect", {
 			
 			this.skinned.removeClass('active');
 			
+			// verified properties because ie have an problem with 'auto' value
+			if( top != 'auto' ) { animate.top = top; }
+			if( bottom != 'auto' ) { animate.bottom = bottom; }
+			animate.height = 0;
+			
 			this.holder_list
 				.css({ overflow: 'hidden'})
-				.animate({
-					top		: top,
-					height	: 0
-				},{
+				.animate( animate ,
+				{
 					duration: o.duration,
 					easing	: o.easing,
 					complete: function() {
