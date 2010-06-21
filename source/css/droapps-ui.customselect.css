@@ -29,7 +29,7 @@ dl.droapps-ui-customselect dd ul li a {
 
 dl.droapps-ui-customselect {
 	list-style: none;
-	float: left;
+	width: 100px;
 	position: relative;
 	cursor: pointer;
 }
@@ -85,6 +85,7 @@ dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-
 
 dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a {
 	color: #fff;
+	text-decoration: none;
 }
 
 dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a.selected {

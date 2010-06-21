@@ -9,8 +9,9 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.js"></script>
 		
 		<!-- plugin files -->
-		<link href="http://github.com/diegotres/droapps-ui.customselect/raw/master/source/css/droapps-ui.customselect.css" rel="stylesheet" type="text/css" media="all" />
+		<!-- <link href="http://github.com/diegotres/droapps-ui.customselect/raw/master/source/css/droapps-ui.customselect.css" rel="stylesheet" type="text/css" media="all" /> -->
 		<!--<script src="http://github.com/diegotres/droapps-ui.customselect/raw/master/source/js/droapps-ui.customselect.js"></script>-->
+		<link href="../source/css/droapps-ui.customselect.css" rel="stylesheet" type="text/css" media="all" />
 		<script src="../source/js/droapps-ui.customselect.js"></script>
 		
 		
@@ -18,7 +19,56 @@
 		<style type="text/css" media="all">
 			* { margin: 0; padding: 0;}
 			body { font: 12px verdana, arial; background: #f1f1f1;}
-			div { width: 960px; margin: 20px auto; background: #fff; padding: 20px; height: 500px; border: 1px solid #999; }
+			div { width: 400px; margin: 200px auto; background: #fff; padding: 20px; border: 1px solid #999; position: relative; }
+			dl.droapps-ui-customselect { margin: 0 auto; width: 200px; }
+			
+			/**
+			* Theme: Default
+			*/
+			dl.droapps-ui-customselect {
+				color: #80A39C;
+				font-family: 'trebuchet ms', verdana, arial, sans-serif;
+				font-size: 10px;
+				padding: 5px;
+				background: #33796B;
+				-moz-border-radius: 6px;
+				-webkit-border-radius: 6px;
+				border-radius: 6px;
+			}
+
+			dl.droapps-ui-customselect dt.droapps-ui-customselect-handler {
+				padding: 7px 5px;
+				background: #004638;
+			}
+
+			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list {
+				background: #33796B;
+				padding: 0 5px 5px 5px;
+/*				margin-top: -5px;*/
+			}
+
+			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items {
+				background: #f1f1f1;
+			}
+
+			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li {
+			}
+
+			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a {
+				color: #999;
+				padding: 5px;
+			}
+
+			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a.selected {
+				display: none;
+			}
+
+			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a:hover,
+			dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a:focus {
+				background: #333;
+				color: #fff;
+			}
+			
 		</style>
 		
 		

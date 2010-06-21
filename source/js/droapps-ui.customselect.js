@@ -26,7 +26,8 @@ $.widget( "droapps-ui.customselect", {
 		text			: '',
 		visible			: 'auto',
 		position		: 'bottom',
-		duration		: 300,
+		duration		: 200,
+		easing			: 'linear',
 		classname		: '',
 		selected_class	: 'selected',
 		open			: null,
@@ -124,14 +125,14 @@ $.widget( "droapps-ui.customselect", {
 			case 'up':
 				this.holder_list.css({
 					top		: 'auto',
-					bottom	: this.handler.outerHeight( true ) || 0
+					bottom	: this.skinned.outerHeight( true ) || 0
 				});
 				break;
 				
 			case 'middle':
 			case 'center':
 				this.holder_list.css({
-					top		: this.handler.outerHeight( true )/2,
+					top		: this.skinned.outerHeight( true )/2,
 					bottom	: 'auto'
 				});
 				break;
@@ -139,13 +140,13 @@ $.widget( "droapps-ui.customselect", {
 			case 'bottom':
 			case 'down':
 				this.holder_list.css({
-					top		: this.handler.outerHeight( true ),
+					top		: this.skinned.outerHeight( true ),
 					bottom	: 'auto'
 				});
 				break;
 			default:
 				this.holder_list.css({
-					top		: this.handler.outerHeight( true ),
+					top		: this.skinned.outerHeight( true ),
 					bottom	: 'auto'
 				});
 		}
@@ -163,7 +164,6 @@ $.widget( "droapps-ui.customselect", {
 	_fixHeight: function() {
 		if ( typeof this.options.visible === 'number' && this.items.length > this.options.visible ) {
 			this.holder_list_height = this.height_items * this.options.visible;
-			console.log( this.holder_list_height );
 			this.holder_items
 				.height( this.holder_list_height )
 				.css({ overflowY: 'auto', overflowX: 'hidden' });
@@ -188,16 +188,32 @@ $.widget( "droapps-ui.customselect", {
 		
 		if( this.holder_list.not(':visible') ) {
 			if ( this.options.position == 'middle' || this.options.position == 'center' ) {
-				this.holder_list.height(0).css({display: 'block'}).animate({
-					top: -this.holder_list_height/2 + this.handler.outerHeight( true )/2,
-					height: this.holder_list_height
-				}, this.options.duration, function(){
-					if( self.options.open ) { self.options.open.apply( context , arguments ); }
-				});
+				this.holder_list
+					.height(0)
+					.css({display: 'block'})
+					.animate({
+						top		: -this.holder_list_height/2 + this.skinned.outerHeight( true )/2,
+						height	: this.holder_list_height
+					},{
+						duration: this.options.duration,
+						easing	: this.options.easing,
+						complete: function() {
+							if( self.options.open ) { self.options.open.apply( context , arguments ); }
+						}
+					});
 			} else {
-				this.holder_list.slideDown( this.options.duration , function(){
-					if( self.options.open ) { self.options.open.apply( context , arguments ); }
-				});
+				this.holder_list
+					.height(0)
+					.css({ display: 'block' })
+					.animate({
+						height	: this.holder_list_height
+					},{
+						duration: this.options.duration,
+						easing	: this.options.easing,
+						complete: function() {
+							if( self.options.open ) { self.options.open.apply( context , arguments ); }
+						}
+					});
 			}
 		}
 	},
@@ -205,20 +221,34 @@ $.widget( "droapps-ui.customselect", {
 	_close: function( e ) {
 		var self    = this,
 			context = this.options.context ? this.options.context : this.skinned;
-			
+		
 		if( this.holder_list.is(':visible') ) {
 			if ( this.options.position == 'middle' || this.options.position == 'center' ) {
-				this.holder_list.animate({
-					top: this.handler.outerHeight( true )/2,
-					height: 0
-				}, this.options.duration, function(){
-					$(this).height(0).css({display: 'none'});
-					if( self.options.close ) { self.options.close.apply( context , arguments ); }
-				});
+				this.holder_list
+					.animate({
+						top		: this.skinned.outerHeight( true )/2,
+						height	: 0
+					},{
+						duration: this.options.duration,
+						easing	: this.options.easing,
+						complete: function() {
+							$(this).height(0).css({display: 'none'});
+							if( self.options.close ) { self.options.close.apply( context , arguments ); }
+						}
+					});
 			} else {
-				this.holder_list.css({ overflow: 'hidden'}).slideUp( this.options.duration , function(){
-					if( self.options.close ) { self.options.close.apply( context , arguments ); }
-				});
+				this.holder_list
+					.css({ overflow: 'hidden'})
+					.animate({
+						height	: 0
+					},{
+						duration: this.options.duration,
+						easing	: this.options.easing,
+						complete: function() {
+							$(this).height(0).css({display: 'none'});
+							if( self.options.close ) { self.options.close.apply( context , arguments ); }
+						}
+					});
 			}
 		}
 	},
