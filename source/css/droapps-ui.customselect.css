@@ -35,6 +35,7 @@ dl.droapps-ui-customselect {
 	/* active hasLayout property*/
 	display: inline-block;
 	zoom: 1;
+	height: 1;
 }
 
 dl.droapps-ui-customselect.droapps-ui-customselect-disabled {
