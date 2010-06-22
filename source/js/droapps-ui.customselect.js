@@ -31,7 +31,8 @@ $.widget( "droapps-ui.customselect", {
 		beforeOpen		: null,
 		beforeClose		: null,
 		onOpen			: null,
-		onClose			: null
+		onClose			: null,
+		context			: null
 	},
 	
 	_create: function() {

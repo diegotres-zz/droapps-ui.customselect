@@ -32,78 +32,40 @@ dl.droapps-ui-customselect {
 	width: 100px;
 	position: relative;
 	cursor: pointer;
+	/* active hasLayout property*/
+	display: inline-block;
+	zoom: 1;
 }
 
 dl.droapps-ui-customselect.droapps-ui-customselect-disabled {
 	cursor: default;
 }
 
-dl.droapps-ui-customselect dt.droapps-ui-customselect-handler {
+dl.droapps-ui-customselect dt {
 	display: block;
 	position: relative;
 }
 
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list {
+dl.droapps-ui-customselect dd {
 	position: absolute;
 	z-index: 9999;
 	left: 0;
 	width: 100%;
 }
 
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items {
+dl.droapps-ui-customselect dd ul {
 	position: relative;
 }
 
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li {
+dl.droapps-ui-customselect dd ul li {
 	list-style: none;
 }
 
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a {
+dl.droapps-ui-customselect dd ul li a {
 	display: block;
 	text-decoration: none;
 }
 
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a.selected {
+dl.droapps-ui-customselect dd ul li a.selected {
 	cursor: default;
 }
-
-
-/**
-* Theme: Default
-*/
-/*dl.droapps-ui-customselect {
-	background: #ff2f41;
-	color: #fff;
-}
-
-dl.droapps-ui-customselect dt.droapps-ui-customselect-handler {
-	background: #9e9b64;
-}
-
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list {
-	background: #ff2f41;
-}
-
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items {
-	background: #9e9b64;
-}
-
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li {
-}
-
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a {
-	color: #fff;
-	text-decoration: none;
-}
-
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a.selected {
-	display: none;
-}
-
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a:hover,
-dl.droapps-ui-customselect dd.droapps-ui-customselect-holder-list ul.droapps-ui-customselect-holder-items li a:focus {
-	background: #f2ebb7;
-	color: #3c4739;
-}
-
-*/
