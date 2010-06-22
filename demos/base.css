@@ -1,0 +1,181 @@
+
+/* RESET
+---------------------------------------- */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+/*	height: 1000px;*/
+}
+
+body {
+	font-family: helvetica, arial, sans-serif;
+	font-size: 12px;
+	background: #f1f1f1;
+	color: #666;
+	overflow-x: hidden;
+}
+
+article, section, header, footer, nav, hgroup {
+	display: block;
+}
+
+code {
+	background: #f1f1f1;
+	padding: 10px;
+	display: block;
+	margin-bottom: 10px;
+}
+
+pre { 
+	background: #000; 
+	color: #fff; 
+	padding: 15px;
+	margin: 5px 0;
+}
+
+a {
+	color: #a00;
+}
+
+/* GENERAL
+---------------------------------------- */
+.fork-me {
+	background: url(http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png);
+	width: 149px;
+	height: 149px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-decoration: none;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+.center {
+	width: 990px;
+	margin: 0 auto;
+}
+
+.icon-zip {
+	
+}
+
+/* HEADER
+---------------------------------------- */
+header {
+	color: #fff;
+	background: #333;
+	height: 49px;
+	display: block;
+	-moz-box-shadow: 0px 0px 10px #000;
+	-webkit-box-shadow: 0px 0px 10px #000;
+	box-shadow: 0px 0px 10px #000;
+	position: relative;
+}
+
+header hgroup {
+	display: block;
+	width: 940px;
+	margin: 0 auto;
+	padding-top: 20px;
+/*	background: #a00;*/
+	height: 49px;
+	text-align: center;
+}
+
+header hgroup a {
+	color: #fff;
+	text-decoration: none;
+	padding: 5px 10px;
+}
+
+header h1 a {
+	background: #a00;
+	color: #f1f1f1;
+	font-size: 20px;
+	-moz-box-shadow: 0px -1px 1px #000;
+	-webkit-box-shadow: 0px -1px 1px #000;
+	box-shadow: 0px -1px 1px #000;
+	text-shadow: 0 1px 1px #000;
+}
+
+header h2 {
+	margin-top: 10px;
+}
+
+header h2 a {
+	font-size: 10px;	
+	color: #333;
+}
+
+header h2 a:hover {
+	color: #a00;
+}
+
+header .download {
+	position: absolute;
+	right: 150px;
+	top: 25px;
+}
+
+/* ARTICLE
+---------------------------------------- */
+article {
+	display: block;
+	width: 900px;
+	margin: 0 auto;
+	background: #fff;
+	padding: 20px;
+}
+
+article h1 {
+	color: #a00;
+	padding: 0 0 10px 0;
+	font-size: 22px;
+}
+
+article section {
+	display: block;
+	margin: 20px 0;	
+}
+
+article dl.doc dt {
+	font-size: 16px;
+	font-weight: bold;
+	color: #000;
+	margin: 20px 0 10px 0;
+	background: #eee;
+	padding: 10px;
+}
+
+article dl.doc dt:first-child {
+	margin-top: 0;
+}
+
+article dl.doc dt span {
+	color: #555;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+article dl.doc dd {
+	padding: 5px 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
