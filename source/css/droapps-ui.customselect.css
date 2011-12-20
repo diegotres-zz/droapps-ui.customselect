@@ -8,12 +8,12 @@
 * Dual licensed under the MIT and GPL licenses.
 */
 select.droapps-ui-customselect-skinned {
-	position: absolute;
-	left: -9999px;
-	top: auto;
-	width: 1px;
-	height: 1px;
-	overflow: hidden;
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 /* resetting plugin elements */
@@ -23,50 +23,50 @@ dl.droapps-ui-customselect dd,
 dl.droapps-ui-customselect dd ul,
 dl.droapps-ui-customselect dd ul li,
 dl.droapps-ui-customselect dd ul li a {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 dl.droapps-ui-customselect {
-	list-style: none;
-	width: 100px;
-	position: relative;
-	cursor: pointer;
-	/* active hasLayout property*/
-	display: inline-block;
-	zoom: 1;
-	height: 1;
+  list-style: none;
+  width: 100px;
+  position: relative;
+  cursor: pointer;
+  /* active hasLayout property*/
+  display: inline-block;
+  zoom: 1;
+  height: 1;
 }
 
 dl.droapps-ui-customselect.droapps-ui-customselect-disabled {
-	cursor: default;
+  cursor: default;
 }
 
 dl.droapps-ui-customselect dt {
-	display: block;
-	position: relative;
+  display: block;
+  position: relative;
 }
 
 dl.droapps-ui-customselect dd {
-	position: absolute;
-	z-index: 9999;
-	left: 0;
-	width: 100%;
+  position: absolute;
+  z-index: 9999;
+  left: 0;
+  width: 100%;
 }
 
 dl.droapps-ui-customselect dd ul {
-	position: relative;
+  position: relative;
 }
 
 dl.droapps-ui-customselect dd ul li {
-	list-style: none;
+  list-style: none;
 }
 
 dl.droapps-ui-customselect dd ul li a {
-	display: block;
-	text-decoration: none;
+  display: block;
+  text-decoration: none;
 }
 
 dl.droapps-ui-customselect dd ul li a.selected {
-	cursor: default;
+  cursor: default;
 }
