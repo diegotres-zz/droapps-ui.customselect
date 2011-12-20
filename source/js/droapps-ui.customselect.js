@@ -3,7 +3,7 @@
  * Creates a skinned version of a select tag form
  *
  * Version
- *   0.9.1
+ *   0.9.2
  *
  * Author:
  *   Diego Tres /// D3
