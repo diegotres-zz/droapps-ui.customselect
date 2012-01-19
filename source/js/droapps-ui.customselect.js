@@ -3,7 +3,7 @@
  * Creates a skinned version of a select tag form
  *
  * Version
- *   0.9.2
+ *   0.9.3
  *
  * Author:
  *   Diego Tres /// D3
@@ -118,10 +118,12 @@ $.widget( "droapps-ui.customselect", {
       e.preventDefault();
       e.stopPropagation();
       if( self.options.disabled || $(e.currentTarget).hasClass( o.selected_class ) ) { return; }
-      self.value({
-        value: $(e.currentTarget).attr('rel'),
-        label: $(e.currentTarget).text()
-      });
+      self.value($(e.currentTarget).attr('rel'));
+      
+      // self.value({
+      //   value: $(e.currentTarget).attr('rel'),
+      //   label: $(e.currentTarget).text()
+      // });
     });
   },
   
@@ -307,25 +309,25 @@ $.widget( "droapps-ui.customselect", {
   },
   
   value: function( new_value ) {
-    var self = this
-      , o    = this.options
-      , val  = new_value.value
-      , txt  = new_value.label
+    var self            = this
+      , o               = this.options
+      , current_value   = $( ':selected' , this.element ).val()
+      , has_new_element = this.items.filter('[rel='+ new_value +']').length > 0
+      , new_element
     ;
-    
-    this.items
-      .removeClass( o.selected_class )
-      .filter('[rel='+ val +']')
-      .addClass( o.selected_class );
-    
-    this.element.val( val );
-    this.handler.text( txt );
-    this._close();
-    if ( new_value === undefined ) {
-      return this._value();
+
+    if( new_value && has_new_element ) {
+      new_element = this.items.filter('[rel='+ new_value +']');
+      this.items.removeClass( o.selected_class );
+      new_element.addClass( o.selected_class );
+      this.element.val( new_value );
+      this.handler.text( new_element.text() );
+      this._close();
+      this._setOption( 'value' , new_value );
+      return this;
+    } else {
+      return current_value;
     }
-    this._setOption( 'value' , val );
-    return this;
   },
   
   _setOption: function( key, value ) {
@@ -345,14 +347,6 @@ $.widget( "droapps-ui.customselect", {
         this.skinned[ value ? 'addClass' : 'removeClass']('disabled');
         break;
     }
-  },
-
-  _value: function() {
-    var self = this
-      , o    = this.options
-    ;
-      
-    return o.value;
   },
   
   widget: function() {

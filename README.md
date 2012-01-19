@@ -1,1 +1,1 @@
-see: [documentation](http://diegotres.github.com/droapps-ui.customselect)
+see: [documentation](http://diegotres.github.com/droapps-ui.customselect/demos)
