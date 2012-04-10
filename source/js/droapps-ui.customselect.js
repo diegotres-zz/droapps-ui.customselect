@@ -3,13 +3,13 @@
  * Creates a skinned version of a select tag form
  *
  * Version
- *   0.9.3
+ *   0.9.4
  *
  * Author:
- *   Diego Tres /// D3
+ *   Diego Tres (diegotres@gmail.com)
  *
- * Contact:
- *   me@diegotres.com
+ * Contributors:
+ *   Ivo Rafael (ivo.rafael@gmail.com)
  * 
  * Dual licensed under the MIT and GPL licenses.
  *
@@ -33,6 +33,7 @@ $.widget( "droapps-ui.customselect", {
     , onOpen         : null
     , onClose        : null
     , context        : null
+    , is_absolute    : false
   },
   
   _create: function() {
@@ -40,9 +41,13 @@ $.widget( "droapps-ui.customselect", {
       , o    = this.options
     ;
       
+    $.customselect = $.customselect || {};
+    $.customselect.last_opened = $.customselect.last_opened || null;
+
     this.element_width = this.element.outerWidth( true );
     o.disabled         = this.element.is( ":disabled" );
     this.element_items = $( 'option' , this.element );
+    this.element_pos   = this.options.is_absolute ? this.element.position() : null;
     this.selected_item = $( ':selected' , this.element );
     this.skinned       = $(
       '<dl class="droapps-ui-customselect ui-widget ui-widget-content ui-corner-all">' +
@@ -100,7 +105,7 @@ $.widget( "droapps-ui.customselect", {
       , o    = this.options
     ;
       
-    this.doc_body.bind( 'click.select' , $.proxy( this._close , this ) );
+    this.doc_body.bind( 'mouseup.select' , $.proxy( this._close , this ) );
     
     this.skinned.bind( 'click.select' , function(e){ e.stopPropagation(); } );
     
@@ -131,7 +136,16 @@ $.widget( "droapps-ui.customselect", {
     // we insert the skinned element before all operations
     // because we need to get some values that's
     // only possible when element is at dom.
-    this.skinned.insertAfter( this.element );
+    if( this.options.is_absolute ) {
+      this.skinned.css({
+        position : 'absolute',
+        top      : this.element_pos.top,
+        left     : this.element_pos.left
+      });
+      this.skinned.appendTo( $( 'body' ) );
+    } else {
+      this.skinned.insertAfter( this.element );
+    }
   },
   
   _position: function() {
@@ -226,6 +240,7 @@ $.widget( "droapps-ui.customselect", {
   },
   
   _open: function( e ) {
+
     var self    = this
       , o       = this.options
       , context = o.context ? o.context : this.skinned
@@ -233,6 +248,8 @@ $.widget( "droapps-ui.customselect", {
       , bottom  = this.holder_list.css('bottom')
       , animate = {}
     ;
+    
+    if($.customselect.last_opened !== null && $.customselect.last_opened !== self ) { $.customselect.last_opened._close(); };
     
     if( this.holder_list.not(':visible') ) {
       
@@ -257,6 +274,7 @@ $.widget( "droapps-ui.customselect", {
           duration: o.duration,
           easing  : o.easing,
           complete: function() {
+            $.customselect.last_opened = self;
             if( o.onOpen ) { o.onOpen.apply( context , arguments ); }
           }
         });
