@@ -55,7 +55,7 @@ $.widget( "droapps-ui.customselect", {
         '<dd class="droapps-ui-customselect-holder-list"><ul class="droapps-ui-customselect-holder-items" /></dd>' +
       '</dl>'
     );
-    this.element.addClass('droapps-ui-customselect-skinned');
+    this.element.addClass('droapps-ui-customselect-skinned 0'.replace( /0/g, this.options.is_absolute ? 'is_absolute' : '' ) );
     this.skinned.addClass(function(){
       return [ o.classname , o.position ].join(' ');
     });

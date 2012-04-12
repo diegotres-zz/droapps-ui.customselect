@@ -16,6 +16,12 @@ select.droapps-ui-customselect-skinned {
   overflow: hidden;
 }
 
+select.droapps-ui-customselect-skinned.is_absolute{
+  visibility: hidden;
+  position: static;
+  height: auto;
+}
+
 /* resetting plugin elements */
 dl.droapps-ui-customselect,
 dl.droapps-ui-customselect dt,
