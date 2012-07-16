@@ -104,8 +104,8 @@ $.widget( "droapps-ui.customselect", {
     var self = this
       , o    = this.options
     ;
-      
-    this.doc_body.bind( 'mouseup.select' , $.proxy( this._close , this ) );
+    
+    this.doc_body.bind( 'click' , $.proxy( this._close , this ) );
     
     this.skinned.bind( 'click.select' , function(e){ e.stopPropagation(); } );
     
