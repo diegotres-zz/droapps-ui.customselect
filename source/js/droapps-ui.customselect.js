@@ -3,13 +3,13 @@
  * Creates a skinned version of a select tag form
  *
  * Version
- *   0.9.4
+ *   0.9.5
  *
  * Author:
  *   Diego Tres (diegotres@gmail.com)
  *
  * Contributors:
- *   Ivo Rafael (ivo.rafael@gmail.com)
+ * https://github.com/diegotres/droapps-ui.customselect/graphs/contributors
  * 
  * Dual licensed under the MIT and GPL licenses.
  *
@@ -124,11 +124,6 @@ $.widget( "droapps-ui.customselect", {
       e.stopPropagation();
       if( self.options.disabled || $(e.currentTarget).hasClass( o.selected_class ) ) { return; }
       self.value($(e.currentTarget).attr('rel'));
-      
-      // self.value({
-      //   value: $(e.currentTarget).attr('rel'),
-      //   label: $(e.currentTarget).text()
-      // });
     });
   },
   
@@ -330,12 +325,12 @@ $.widget( "droapps-ui.customselect", {
     var self            = this
       , o               = this.options
       , current_value   = $( ':selected' , this.element ).val()
-      , has_new_element = this.items.filter('[rel='+ new_value +']').length > 0
+      , has_new_element = this.items.filter('[rel="' + new_value + '"]').length > 0
       , new_element
     ;
 
     if( new_value && has_new_element ) {
-      new_element = this.items.filter('[rel='+ new_value +']');
+      new_element = this.items.filter('[rel="'+ new_value +'"]');
       this.items.removeClass( o.selected_class );
       new_element.addClass( o.selected_class );
       this.element.val( new_value );
