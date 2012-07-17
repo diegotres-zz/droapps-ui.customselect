@@ -9,7 +9,7 @@
  *   Diego Tres (diegotres@gmail.com)
  *
  * Contributors:
- * https://github.com/diegotres/droapps-ui.customselect/graphs/contributors
+ *   https://github.com/diegotres/droapps-ui.customselect/graphs/contributors
  * 
  * Dual licensed under the MIT and GPL licenses.
  *
